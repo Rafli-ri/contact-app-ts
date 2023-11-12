@@ -9,6 +9,11 @@ implement :
 - Apollo Client
 - emotion css
 
+feature :
+- Search list Contact
+- Pagination
+- Add New Contact
+- Add New Phone Number  
 
 # React + TypeScript + Vite
 
