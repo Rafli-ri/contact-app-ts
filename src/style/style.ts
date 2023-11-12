@@ -95,6 +95,14 @@ export const HomePageAction = styled.div`
   gap: 16px;
   bottom: 90px;
   right: 40px;
+  ${mq(1)} {
+    bottom: 79px;
+    right: 15px;
+  }
+  ${mq(2)} {
+    bottom: 80px;
+    right: 20px;
+  }
 `;
 
 export const AddButton = styled.button`
@@ -113,6 +121,11 @@ export const AddButton = styled.button`
   cursor: pointer;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  ${mq(1)} {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -160,12 +173,11 @@ export const Input = styled.input`
 
 export const SearchContainer = styled.div`
   margin: 7rem auto 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 100%;
+  width: 40rem;
   ${mq(1)} {
-    width: 50%;
+    max-width: 90%;
+    margin-inline: auto;
   }
 `;
 
@@ -184,7 +196,7 @@ export const ListContainer = styled.div`
 `;
 
 export const InputSearch = styled.input`
-  width: 40rem;
+  width: 100%;
   padding: 15px;
   border: 2px solid #f4f4f4;
   outline: none;
@@ -202,9 +214,11 @@ export const PaginationContainer = styled.nav`
   display: flex;
   justify-content: start;
   gap: 30px;
+  margin-bottom: 100px;
   ${mq(1)} {
     width: 90%;
-    margin: 50px auto;
+    margin-bottom: 100px;
+    margin-inline: auto;
   }
 `;
 
