@@ -38,9 +38,15 @@ const Ul = styled.ul`
 const ListContainer = styled.div`
   margin: 2rem auto;
   padding: 0;
+  max-width: 100%;
   width: 40rem;
   margin-bottom: 70px;
+  ${mq(1)} {
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
+
 
 const ImageProfile = styled.div`
   display: flex;
