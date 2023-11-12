@@ -4,6 +4,10 @@ demo : https://contact-app-ts.netlify.app/
 
 My Portofolio : http://raflirifaldi.infinityfreeapp.com/
 
+implement : 
+- graphql
+- Apollo Client
+- emotion css
 
 
 # React + TypeScript + Vite
