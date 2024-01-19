@@ -18,7 +18,7 @@ const ContactDetailItem: React.FC<ContactsDetail> = ({
   phones,
 }: ContactsDetail) => {
   return (
-    <div>
+    <>
       <div>
         <h4>Created At : </h4>
         <P>{dateFormat(created_at)}</P>
@@ -35,7 +35,7 @@ const ContactDetailItem: React.FC<ContactsDetail> = ({
           <P>{number}</P>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

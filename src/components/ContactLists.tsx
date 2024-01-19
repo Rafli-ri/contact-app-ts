@@ -69,7 +69,7 @@ function getRandomColor(id: any) {
 const ContactLists: React.FC = () => {
   const [page, setPage] = useState<number>(0);
   const [searchContacts, setSearchContacts] = useState("");
-  console.log(searchContacts);
+
   const { loading, error, data } = useQuery(GET_CONTACT, {
     variables: {
       limit: PAGE_SIZE,
@@ -80,10 +80,39 @@ const ContactLists: React.FC = () => {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  const filteredContacts = data?.contact.filter((contact: any) => {
-    const fullName = `${contact.first_name} ${contact.last_name}`.toLowerCase();
-    return fullName.includes(searchContacts.toLowerCase());
-  });
+  function filterContacts() {
+    return data?.contact.filter((contact: any) => {
+      const fullName =
+        `${contact.first_name} ${contact.last_name}`.toLowerCase();
+      return fullName.includes(searchContacts.toLowerCase());
+    });
+  }
+  const filteredContacts = filterContacts();
+
+  function handlePrevPagination() {
+    return setPage((prev) => prev - 1);
+  }
+
+  function handleNextPagination() {
+    return setPage((prev) => prev + 1);
+  }
+
+  function renderContactItem({ id, first_name, last_name }: Contacts) {
+    return (
+      <Link to={`detail/${id}`} style={{ textDecoration: "none" }}>
+        <Li key={id}>
+          <ImageProfile color={`#${getRandomColor(id)}`}>
+            {first_name.slice(0, 1)}
+            {last_name.slice(0, 1)}
+          </ImageProfile>
+          <p>
+            {first_name} {last_name}
+          </p>
+        </Li>
+      </Link>
+    );
+  }
+  const renderedContacts = filteredContacts?.map(renderContactItem);
 
   return (
     <>
@@ -95,24 +124,11 @@ const ContactLists: React.FC = () => {
       />
       <ListContainer>
         <h2>Contact List</h2>
-        <Ul>
-          {filteredContacts.map(({ id, first_name, last_name }: Contacts) => (
-            <Link to={`detail/${id}`} style={{ textDecoration: "none" }}>
-              <Li key={id}>
-                <ImageProfile color={`#${getRandomColor(id)}`}>
-                  {first_name.slice(0, 1)}
-                  {last_name.slice(0, 1)}
-                </ImageProfile>
-                {first_name} {last_name}
-              </Li>
-            </Link>
-          ))}
-        </Ul>
-        {/* pagination */}
+        <Ul>{renderedContacts}</Ul>
         <Pagination
           page={page}
-          prevPage={() => setPage((prev) => prev - 1)}
-          nextPage={() => setPage((prev) => prev + 1)}
+          prevPage={handlePrevPagination}
+          nextPage={handleNextPagination}
         />
       </ListContainer>
     </>

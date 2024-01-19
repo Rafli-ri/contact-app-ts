@@ -155,6 +155,10 @@ export const ButtonAction = styled.button`
 `;
 
 export const Control = styled.input`
+  ::placeholder {
+    color: #adb5bd;
+    font-size: 12px;
+  }
   padding: 8px;
   width: 100%;
   border: 1px solid #ccc;

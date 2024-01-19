@@ -5,6 +5,13 @@ interface InputControl {
   label: string;
   id: string;
   name: string;
+  type?: "text" | "number" | "tel";
+  defaultValue?: string | string[] | any;
+  pattern?: any;
+  onChange?: (e: any) => void;
+  maxLength?: number;
+  placeholder?: string;
+  readOnly?: boolean | string | any;
 }
 
 const Input: React.FC<InputControl> = ({ label, id, ...props }) => {

@@ -29,7 +29,7 @@ const AddPhoneNumber: React.FC = () => {
     e: React.SyntheticEvent<EventTarget>
   ): void => {
     e.preventDefault();
-    // console.log(id, `${"+62" + newNumber}`);
+
     if (newNumber.trim().length === 0) {
       return;
     }

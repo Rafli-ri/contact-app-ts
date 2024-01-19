@@ -3,8 +3,11 @@ import { ADD_CONTACT, GET_CONTACT } from "../gql/query";
 import { useMutation } from "@apollo/client";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import { Card, CardBody, Control, Title, Label } from "../style/style";
+import { Card, CardBody, Title } from "../style/style";
 import Button from "./UI/Button";
+import Input from "./UI/Input";
+import Loading from "./Loading";
+import Error from "./Error";
 
 const AddContact: React.FC = () => {
   const navigate = useNavigate();
@@ -18,8 +21,9 @@ const AddContact: React.FC = () => {
       "GetComments", // Query name
     ],
   });
-  if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
+
+  if (loading) return <Loading />;
+  if (error) return <Error message={error.message} />;
 
   const submitContactHandler = (e: React.SyntheticEvent<EventTarget>): void => {
     e.preventDefault();
@@ -51,36 +55,38 @@ const AddContact: React.FC = () => {
         <CardBody>
           <Title>Add Contact</Title>
           <form onSubmit={submitContactHandler}>
-            <div>
-              <Label htmlFor="first_name">First Name</Label>
-              <Control
-                type="text"
-                name="firstName"
-                id="first_name"
-                defaultValue={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="last_name">Last Name</Label>
-              <Control
-                type="text"
-                name="lastName"
-                id="last_name"
-                defaultValue={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="number">Number</Label>
-              <Control
-                type="number"
-                name="phoneNumber"
-                id="number"
-                defaultValue={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
+            <Input
+              id="first_name"
+              label="First Name"
+              name="firstName"
+              type="text"
+              defaultValue={firstName}
+              onChange={(e: any) => setFirstName(e.target.value)}
+              maxLength={16}
+              placeholder="input your first name"
+            />
+            <Input
+              type="text"
+              name="lastName"
+              id="last_name"
+              label="Last Name"
+              defaultValue={lastName}
+              maxLength={16}
+              onChange={(e: any) => setLastName(e.target.value)}
+              placeholder="input your last name"
+            />
+
+            <Input
+              type="tel"
+              name="phoneNumber"
+              id="number"
+              label="Phone Number"
+              defaultValue={phoneNumber}
+              onChange={(e: any) => setPhoneNumber(e.target.value)}
+              pattern="[0-9\s]{13,19}"
+              placeholder="xxx xxx xxx"
+            />
+
             <Button type="submit">Add Contact</Button>
           </form>
         </CardBody>
