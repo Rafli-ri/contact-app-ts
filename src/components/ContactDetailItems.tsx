@@ -1,6 +1,11 @@
 import React from "react";
 import dateFormat from "dateformat";
-import { P } from "../style/style";
+import { css } from "@emotion/react";
+
+const Paragraph = css`
+  margin: 6px;
+  border-bottom: 2px solid #ddd;
+`;
 
 interface ContactsDetail {
   id: number;
@@ -21,18 +26,20 @@ const ContactDetailItem: React.FC<ContactsDetail> = ({
     <>
       <div>
         <h4>Created At : </h4>
-        <P>{dateFormat(created_at)}</P>
+        <p css={Paragraph}>{dateFormat(created_at)}</p>
       </div>
       <div>
         <h4>Contact Name :</h4>
-        <P>
+        <p css={Paragraph}>
           {first_name} {last_name}
-        </P>
+        </p>
       </div>
       <div>
-        <h4>Phone Number :</h4>
-        {phones.map(({ number }: ContactsDetail) => (
-          <P>{number}</P>
+        <h4>phone Number :</h4>
+        {phones.map(({ number, id }: ContactsDetail) => (
+          <p css={Paragraph} key={id}>
+            {number}
+          </p>
         ))}
       </div>
     </>

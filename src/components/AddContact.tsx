@@ -3,11 +3,17 @@ import { ADD_CONTACT, GET_CONTACT } from "../gql/query";
 import { useMutation } from "@apollo/client";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import { Card, CardBody, Title } from "../style/style";
+import { Card, CardBody } from "../style/style";
 import Button from "./UI/Button";
 import Input from "./UI/Input";
 import Loading from "./Loading";
 import Error from "./Error";
+import { css } from "@emotion/react";
+
+const Title = css`
+  color: #495057;
+  margin: 20px 0;
+`;
 
 const AddContact: React.FC = () => {
   const navigate = useNavigate();
@@ -16,10 +22,7 @@ const AddContact: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string[] | string>([""]);
 
   const [insert_contact, { loading, error }] = useMutation(ADD_CONTACT, {
-    refetchQueries: [
-      GET_CONTACT, // DocumentNode object parsed with gql
-      "GetComments", // Query name
-    ],
+    refetchQueries: [GET_CONTACT, "GetComments"],
   });
 
   if (loading) return <Loading />;
@@ -53,7 +56,7 @@ const AddContact: React.FC = () => {
       <Header />
       <Card>
         <CardBody>
-          <Title>Add Contact</Title>
+          <h1 css={Title}>Add Contact</h1>
           <form onSubmit={submitContactHandler}>
             <Input
               id="first_name"
@@ -84,10 +87,14 @@ const AddContact: React.FC = () => {
               defaultValue={phoneNumber}
               onChange={(e: any) => setPhoneNumber(e.target.value)}
               pattern="[0-9\s]{13,19}"
+              maxLength={14}
               placeholder="xxx xxx xxx"
             />
 
             <Button type="submit">Add Contact</Button>
+            <Button textOnly onClick={() => navigate("/")}>
+              Back
+            </Button>
           </form>
         </CardBody>
       </Card>

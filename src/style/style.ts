@@ -21,7 +21,7 @@ export const CardContainer = styled.div`
   width: 100%;
   margin-inline: auto;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  margin-top: 1rem;
+  margin-top: 7rem;
   margin-bottom: 10rem;
   ${mq(1)} {
     width: 80%;
@@ -32,6 +32,7 @@ export const CardBody = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   padding: 40px;
+  border: 0;
 `;
 
 export const Navigation = styled.div`
@@ -44,7 +45,7 @@ export const Navigation = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid #ffffff;
   background-color: #ffffff;
-  padding: 20px 10%;
+  padding: 0 10%;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   z-index: 99;
 `;
